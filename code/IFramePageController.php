@@ -1,9 +1,12 @@
 <?php
 
+namespace SilverStripe\IFrame;
+
+use SilverStripe\CMS\Controllers\ContentController;
 use SilverStripe\Control\Director;
 use SilverStripe\View\Requirements;
 
-class IFramePageController extends PageController
+class IFramePageController extends ContentController
 {
     public function init()
     {

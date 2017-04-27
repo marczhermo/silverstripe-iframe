@@ -1,5 +1,7 @@
 <?php
+namespace SilverStripe\IFrame;
 
+use Page;
 use SilverStripe\Forms\TextField;
 use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\CheckboxField;

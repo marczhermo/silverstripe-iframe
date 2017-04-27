@@ -1,7 +1,12 @@
 <?php
+namespace SilverStripe\IFrame\Tests;
 
 use SilverStripe\Core\Config\Config;
+use SilverStripe\Control\Director;
+use SilverStripe\ORM\ValidationException;
 use SilverStripe\Dev\SapphireTest;
+use SilverStripe\IFrame\IFramePage;
+use SilverStripe\IFrame\IFramePageController;
 
 class IFramePageTest extends SapphireTest
 {
@@ -91,7 +96,7 @@ class IFramePageTest extends SapphireTest
 
         foreach ($tests['banned'] as $url) {
             $iframe->IFrameURL = $url;
-            $this->setExpectedException('SilverStripe\ORM\ValidationException');
+            $this->setExpectedException(ValidationException::class);
             $iframe->write();
         }
     }
@@ -104,40 +109,40 @@ class IFramePageTest extends SapphireTest
         $page->URLSegment = 'iframe';
         $page->IFrameURL = 'http://target.com';
 
-        Config::inst()->update('SilverStripe\Control\Director', 'alternate_protocol', 'http');
-        Config::inst()->update('SilverStripe\Control\Director', 'alternate_base_url', 'http://host.com');
+        Config::inst()->update(Director::class, 'alternate_protocol', 'http');
+        Config::inst()->update(Director::class, 'alternate_base_url', 'http://host.com');
         $page->ForceProtocol = '';
         $controller = new IFramePageController($page);
         $controller->doInit();
         $response = $controller->getResponse();
         $this->assertNull($response->getHeader('Location'));
 
-        Config::inst()->update('SilverStripe\Control\Director', 'alternate_protocol', 'https');
-        Config::inst()->update('SilverStripe\Control\Director', 'alternate_base_url', 'https://host.com');
+        Config::inst()->update(Director::class, 'alternate_protocol', 'https');
+        Config::inst()->update(Director::class, 'alternate_base_url', 'https://host.com');
         $page->ForceProtocol = '';
         $controller = new IFramePageController($page);
         $controller->doInit();
         $response = $controller->getResponse();
         $this->assertNull($response->getHeader('Location'));
 
-        Config::inst()->update('SilverStripe\Control\Director', 'alternate_protocol', 'http');
-        Config::inst()->update('SilverStripe\Control\Director', 'alternate_base_url', 'http://host.com');
+        Config::inst()->update(Director::class, 'alternate_protocol', 'http');
+        Config::inst()->update(Director::class, 'alternate_base_url', 'http://host.com');
         $page->ForceProtocol = 'http://';
         $controller = new IFramePageController($page);
         $controller->doInit();
         $response = $controller->getResponse();
         $this->assertNull($response->getHeader('Location'));
 
-        Config::inst()->update('SilverStripe\Control\Director', 'alternate_protocol', 'http');
-        Config::inst()->update('SilverStripe\Control\Director', 'alternate_base_url', 'http://host.com');
+        Config::inst()->update(Director::class, 'alternate_protocol', 'http');
+        Config::inst()->update(Director::class, 'alternate_base_url', 'http://host.com');
         $page->ForceProtocol = 'https://';
         $controller = new IFramePageController($page);
         $controller->doInit();
         $response = $controller->getResponse();
         $this->assertEquals($response->getHeader('Location'), 'https://host.com/iframe/');
 
-        Config::inst()->update('SilverStripe\Control\Director', 'alternate_protocol', 'https');
-        Config::inst()->update('SilverStripe\Control\Director', 'alternate_base_url', 'https://host.com');
+        Config::inst()->update(Director::class, 'alternate_protocol', 'https');
+        Config::inst()->update(Director::class, 'alternate_base_url', 'https://host.com');
         $page->ForceProtocol = 'http://';
         $controller = new IFramePageController($page);
         $controller->doInit();
