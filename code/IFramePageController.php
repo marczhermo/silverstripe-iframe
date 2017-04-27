@@ -8,7 +8,7 @@ use SilverStripe\View\Requirements;
 
 class IFramePageController extends ContentController
 {
-    public function init()
+    protected function init()
     {
         parent::init();
 
