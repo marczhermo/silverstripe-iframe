@@ -24,7 +24,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "SilverStripe\\IFrame\\Tests\\": "testss/"
+            "SilverStripe\\IFrame\\Tests\\": "tests/"
         }
     },
 	"extra": {
