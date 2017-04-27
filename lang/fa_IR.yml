@@ -2,6 +2,3 @@ fa_IR:
   IFramePage:
     PLURALNAME: 'صفحه اصلی'
     SINGULARNAME: 'صفحه I Frame'
-  SilverStripe\CMS\Model\SiteTree:
-    PLURALNAME: صفحات
-    SINGULARNAME: صفحه

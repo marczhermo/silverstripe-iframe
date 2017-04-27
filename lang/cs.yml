@@ -1,5 +1,3 @@
 cs:
   IFramePage:
     PLURALNAME: 'Základní stránky'
-  SilverStripe\CMS\Model\SiteTree:
-    PLURALNAME: Stránky

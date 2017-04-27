@@ -1,6 +1,3 @@
 lt:
   IFramePage:
     PLURALNAME: 'Baziniai puslapiai'
-  SilverStripe\CMS\Model\SiteTree:
-    PLURALNAME: Puslapiai
-    SINGULARNAME: Puslapis
